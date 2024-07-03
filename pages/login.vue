@@ -36,7 +36,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
         warning.value = [true, 'Something went wrong']
     }
  
-}catch(err){
+}catch(err:any){
     warning.value = [true, err.response.data.message]
     
 }finally{

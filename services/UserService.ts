@@ -44,3 +44,28 @@ export function checkToken(token:String): Promise<any> {
 
     })
 }
+
+export function logoutUser(token:String): Promise<any> {
+    return fetch('http://localhost:8000/api/v1/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: token
+        })
+
+    })
+}
+
+export function getUserById(id:Number): Promise<any> {
+    return fetch('http://localhost:8000/api/v1/get-user-by-id/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: id
+        })
+    })
+}
