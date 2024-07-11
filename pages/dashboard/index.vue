@@ -2,9 +2,10 @@
 
 </script>
 <template>
-    <UContainer>
-        <UCard>
-
-        </UCard>
-    </UContainer>
-  </template>
+  <UContainer>
+    <UCard class="relative">
+      <DashboardHeader />
+      <DashboardTabs />
+    </UCard>
+  </UContainer>
+</template>

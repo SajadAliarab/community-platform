@@ -12,6 +12,7 @@ export interface LoginModel {
 }    
 
 export interface UserModel {
+    id: number;
     userName: string;
     fName: string;
     lName: string | null;

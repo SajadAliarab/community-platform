@@ -8,6 +8,7 @@ const q = ref('')
 const authenticated = ref(false);
 const router = useRouter();
 const userData:UserModel = reactive({
+  id: 0,
   userName: '',
   fName: '',
   lName: '',
