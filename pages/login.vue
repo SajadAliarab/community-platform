@@ -30,7 +30,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
         const data = await res.json();
         localStorage.setItem('token', data.data);
         router.push('/');
-    } else if(res.status === 400){
+    } else if(res.status === 401){
         warning.value = [true, 'Invalid credentials']
     }else{
         warning.value = [true, 'Something went wrong']

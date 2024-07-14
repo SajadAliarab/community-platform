@@ -5,7 +5,9 @@ import { title } from '~/enums/title';
 import type { UserDetailModel } from '~/models/UserDetailModel';
 import { getUserDetail, updateUserDetail } from '~/services/UserDetailService';
 import { enumToArray } from '~/utils/enumToArray';
-import ThePhoneInput from '../UI/ThePhoneInput.vue';
+import type { CountryPhone } from '~/enums/country';
+import { countriesPhone } from '~/enums/country';
+import { updateUser } from '~/services/UserService';
 
 const props = defineProps<{
   userData: {
@@ -24,9 +26,22 @@ const schema = z.object({
     tagline: z.string().optional(),
     title: z.nativeEnum(title).optional(),
     website: z.string().url().optional(),
-    mobile: z.string().optional(),
+    mobile: z.number().min(10).optional(),
 })
 
+const selectedCountry = ref<CountryPhone>(countriesPhone[0]);
+const phoneNumber = ref<string>('');
+    const removeLeadingZero = (phone: string) => {
+    return phone.startsWith('0') ? phone.slice(1) : phone;
+}
+
+    const sortedCountries = computed(() => {
+      return countriesPhone.slice().sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+    });
 const userDetailData: any = ref({
     image:'',
     cover_image: '',
@@ -55,14 +70,17 @@ const getUser = async () => {
 }
 
 
-const handlePhoneNumberChange = (value: string) => {
-  userDetailData.value.mobile = value;
-};
-
 const submitForm = async () => {
     loadingBtn.value = true;
+    if (!userDetailData.value.mobile) {
+        const cleanedPhoneNumber = removeLeadingZero(phoneNumber.value);
+        userDetailData.value.mobile = selectedCountry.value.dialCode + cleanedPhoneNumber;
+    } else {
+        userDetailData.value.mobile = userDetailData.value.mobile;
+    }
     const res = await updateUserDetail(props.userData.id, userDetailData.value);
-    if (res.result === true) {
+    const res2 = await updateUser(props.userData.id, props.userData);
+    if (res.result === true && res2.result === true) {
         warning.value = [false, 'Profile updated successfully'];
         
 
@@ -101,11 +119,16 @@ getUser();
                 <UFormGroup label="Website" name="website">
                     <UInput v-model="userDetailData.website" placeholder="your website " />
                 </UFormGroup>
-                <UFormGroup label="Mobile" name="mobile" >
-                    <ThePhoneInput @update:phoneNumber="handlePhoneNumberChange" />
+                <UFormGroup  v-if="!userDetailData.mobile" label="Mobile" name="mobile" >
+                    <select  v-model="selectedCountry" class="w-10">
+                    <option v-for="country in sortedCountries" :key="country.name" :value="country">
+                    {{ country.flag }} {{ country.name }} ({{ country.dialCode }})
+                    </option>
+                     </select>
+                    <UInput v-model="phoneNumber" placeholder="your mobile number " />
                 </UFormGroup>
-                <UFormGroup label="Point" name="point">
-                    <UInput v-model="userDetailData.point" placeholder="your point " disabled />
+                <UFormGroup v-else label="Mobile" name="mobile" >
+                    <UInput v-model=userDetailData.mobile placeholder="your mobile number " />
                 </UFormGroup>
 
             </div>

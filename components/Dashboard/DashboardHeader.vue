@@ -5,6 +5,7 @@ import { checkToken, getUserById } from '~/services/UserService';
 const router = useRouter();
 const isOpenDelete = ref(false);
 const isOpenEdit = ref(false);
+const isOpenChangePassword = ref(false);
 const userData: any = reactive({
     id: 0,
     userName: '',
@@ -44,6 +45,10 @@ checkAuth();
                 <h1 class="hidden md:block text-white text-2xl font-bold ">{{ userData.fName }}</h1>
             </div>
             <div class="flex justify-end">
+                <UButton color="primary" label="Change Password" class="mr-5" @click="isOpenChangePassword = true" />
+                <UModal v-model="isOpenChangePassword">
+                    <UserChangePassword :userDataID="userData.id" @isOpenChangePassword="isOpenChangePassword=false"/>
+                </UModal>
                 <UButton color="red" label="Delete Profile" class="mr-5" @click="isOpenDelete = true" />
                 <UModal v-model="isOpenDelete">
                     <div class="p-4">

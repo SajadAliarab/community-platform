@@ -50,6 +50,9 @@ const   checkAuth = async() => {
       localStorage.removeItem('token');
     }
    
+  }else{
+    authenticated.value = false;
+  
   }
 }
 const signOut = async () => {
@@ -85,7 +88,7 @@ onMounted(() => {
 })
 
 router.beforeEach(async (to, from, next) => {
-  await checkAuth();
+ checkAuth();
 
   next();
 });

@@ -1,4 +1,4 @@
-import type { LoginModel, RegisterModel } from "~/models/UserModel";
+import type { LoginModel, RegisterModel, UserModel } from "~/models/UserModel";
 
 export function registerUser(registerModel: RegisterModel): Promise<any> {
     return fetch('http://localhost:8000/api/v1/signup', {
@@ -68,4 +68,29 @@ export function getUserById(id:Number): Promise<any> {
             id: id
         })
     })
+}
+export async function  changePasswordUser(id:Number,currentPassword:String,newPassword:String): Promise<any> {
+    return fetch('http://localhost:8000/api/v1/change-password/'+id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+        })
+    }).then(response => response.json())
+}
+export async function updateUser(id:Number,data:UserModel): Promise<any> {
+    return fetch('http://localhost:8000/api/v1/update-user/'+id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userName: data.userName,
+            fName: data.fName,
+            lName: data.lName,
+        })
+    }).then(response => response.json())
 }
