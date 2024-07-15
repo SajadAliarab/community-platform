@@ -82,12 +82,14 @@ const submitForm = async () => {
     const res2 = await updateUser(props.userData.id, props.userData);
     if (res.result === true && res2.result === true) {
         warning.value = [false, 'Profile updated successfully'];
+        loadingBtn.value = false;
         
 
     } else {
         warning.value = [true, 'Failed to update profile'];
+        loadingBtn.value = false;
     }
-    loadingBtn.value = false;
+   
 }
 getUser();
 
@@ -133,7 +135,7 @@ getUser();
 
             </div>
             <div class="flex justify-end gap-5 mt-5">
-                <UButton color="green" label="Save"  type="submit" />
+                <UButton color="green" label="Save"  type="submit" :loading="loadingBtn" />
                 <UButton color="gray" label="Cancel" @click="$emit('isOpenEdit')" />
             </div>
             <div v-if="warning[1]" :class="{ 'text-green-700': !warning[0], 'text-red-700': warning[0] }"

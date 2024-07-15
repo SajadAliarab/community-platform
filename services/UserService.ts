@@ -94,3 +94,11 @@ export async function updateUser(id:Number,data:UserModel): Promise<any> {
         })
     }).then(response => response.json())
 }
+export function deleteUserById(id:Number): Promise<any> {
+    return fetch('http://localhost:8000/api/v1/delete-user/'+id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+}

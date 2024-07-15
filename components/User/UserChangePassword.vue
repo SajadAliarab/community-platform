@@ -29,12 +29,14 @@ const changePassword = async () => {
     const res = await changePasswordUser(props.userDataID, password.currentPassword, password.newPassword);
     if(res.result === true){
         warning.value = [false, 'Password changed successfully'];
+        loadingBtn.value = false;
         setTimeout(() => {
             localStorage.removeItem('token');
             router.push('/login');
         }, 2000);
     }else{
         warning.value = [true, res.message]
+        loadingBtn.value = false;
     }
 
 }
@@ -56,7 +58,7 @@ const changePassword = async () => {
                 <UInput v-model="password.confirmPassword" type="password" />
                 </UFormGroup>
                 <div class="flex justify-end gap-5 mt-5">
-                    <UButton color="primary" label="Change Password" type="submit" />
+                    <UButton color="primary" label="Change Password" type="submit" :loading="loadingBtn" />
                     <UButton color="gray" label="Cancel" @click="$emit('isOpenChangePassword')" />
                 </div>
                 </div>

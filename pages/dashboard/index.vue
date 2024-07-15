@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+definePageMeta({
+  middleware: 'user-auth'
+})
+
 </script>
 <template>
   <UContainer>

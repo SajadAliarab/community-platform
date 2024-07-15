@@ -3,6 +3,8 @@ import { checkToken, getUserById, logoutUser } from '~/services/UserService';
 
 import ThemeSwitcher from './ThemeSwitcher.vue';
 import type { UserModel } from '~/models/UserModel';
+import { getUserDetail } from '~/services/UserDetailService';
+import { title } from '~/enums/title';
 
 const q = ref('')
 const authenticated = ref(false);
@@ -32,19 +34,19 @@ const   checkAuth = async() => {
   const token = localStorage.getItem('token');
   if(token){
     const res =await checkToken(token);
-    if(res.status === 200){
-      authenticated.value = true;
-      const data = await res.json();
-      const res2 = await getUserById(data.data);
-      if(res2.status === 200){
-        const user = await res2.json();
-        userData.userName = user.data.userName;
-        userData.fName = user.data.fName;
-        userData.lName = user.data.lName;
-        userData.email = user.data.email;
-      }
-
-    }else{
+    if (res.status === 200) {
+            const data = await res.json();
+            const res2 = await getUserById(data.data);
+            if (res2.status === 200) {
+              authenticated.value = true;
+                const user = await res2.json();
+                userData.id = user.data.id;
+                userData.userName = user.data.userName;
+                userData.fName = user.data.fName;
+                userData.lName = user.data.lName;
+                userData.email = user.data.email;
+            }
+        }else{
       authenticated.value = false;
       await logoutUser(token);
       localStorage.removeItem('token');
@@ -55,6 +57,27 @@ const   checkAuth = async() => {
   
   }
 }
+const userDetailData: any = ref({
+    image: '',
+    cover_image: '',
+    tagline: '',
+    title: title.Other,
+    website: '',
+    mobile: '',
+    point: 0,
+});
+
+
+const getUser = async () => {
+    await checkAuth();
+    const res = await getUserDetail(userData.id);
+    if (res.result === true) {
+   userDetailData.value = res.data;
+    } else {
+        console.log(res.message);
+    }
+}
+getUser();
 const signOut = async () => {
   try {
     // Fetch sign-out address
@@ -78,14 +101,11 @@ const signOut = async () => {
     console.error('Error signing out:', error);
   }
 }
-
 const dashboard = () => {
   router.push('/dashboard');
 }
 
-onMounted(() => {
-  checkAuth();
-})
+watch(authenticated,getUser);
 
 router.beforeEach(async (to, from, next) => {
  checkAuth();
@@ -136,10 +156,8 @@ router.beforeEach(async (to, from, next) => {
   </div>
     <div v-if="authenticated" >
       <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
-    <UAvatar
-     src="/images/profile.jpg" 
-    size="lg"
-     />
+        <img class="w-14 h-14 rounded-full border-4 border-primary-500 dark:border-gray-950 hover:border-primary-100"
+        :src="`http://localhost:8000/uploads/${userDetailData.image}`" alt="user photo">
 
     <template #account>
       <div class="text-left">
