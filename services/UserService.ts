@@ -5,6 +5,7 @@ export function registerUser(registerModel: RegisterModel): Promise<any> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             userName: registerModel.userName,
@@ -22,6 +23,7 @@ export function loginUser(loginModel: LoginModel,remember:boolean): Promise<any>
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             email: loginModel.email,
@@ -37,6 +39,7 @@ export function checkToken(token:String): Promise<any> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             token: token
@@ -50,6 +53,7 @@ export function logoutUser(token:String): Promise<any> {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             token: token
@@ -59,14 +63,13 @@ export function logoutUser(token:String): Promise<any> {
 }
 
 export function getUserById(id:Number): Promise<any> {
-    return fetch('http://localhost:8000/api/v1/get-user-by-id/', {
-        method: 'POST',
+    return fetch('http://localhost:8000/api/v1/get-user-by-id/'+id, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
-        body: JSON.stringify({
-            id: id
-        })
+       
     })
 }
 export async function  changePasswordUser(id:Number,currentPassword:String,newPassword:String): Promise<any> {
@@ -74,6 +77,7 @@ export async function  changePasswordUser(id:Number,currentPassword:String,newPa
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             currentPassword: currentPassword,
@@ -86,6 +90,7 @@ export async function updateUser(id:Number,data:UserModel): Promise<any> {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         },
         body: JSON.stringify({
             userName: data.userName,
@@ -95,10 +100,11 @@ export async function updateUser(id:Number,data:UserModel): Promise<any> {
     }).then(response => response.json())
 }
 export function deleteUserById(id:Number): Promise<any> {
-    return fetch('http://localhost:8000/api/v1/delete-user/'+id, {
+    return fetch('http://localhost:8000/api/v1/delete-user/1', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+              'Access-Control-Request-Headers': '*'
         }
     })
 }
