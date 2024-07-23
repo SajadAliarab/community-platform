@@ -54,8 +54,6 @@ const checkAuth = async () => {
     }else{
       authenticated.value = false;
     }
-  }else{
-    authenticated.value = false;
   }
 }
 checkAuth();
