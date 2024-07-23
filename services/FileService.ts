@@ -1,7 +1,7 @@
 const apiUrl = 'https://api-community.sajad.uk'; 
 // const apiUrl = 'http://localhost:8000'; 
-export function insertFile(file: File): Promise<Response>{
-    const formData: FormData = new FormData();
+export function insertFile(file:any): Promise<any>{
+    const formData = new FormData();
       formData.append('file', file);
    
       return $fetch(`${apiUrl}/api/v1/upload-file`, {
