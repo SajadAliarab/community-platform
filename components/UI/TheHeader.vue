@@ -34,7 +34,6 @@ const items = [
   }]
 ]
 const checkAuth = async () => {
-  if(process.client){
     const token = localStorage.getItem('token');
     if (token) {
         const res = await checkToken(token);
@@ -54,9 +53,7 @@ const checkAuth = async () => {
     }else{
       authenticated.value = false;
     }
-  }else{
-    authenticated.value = false;
-  }
+
 }
 checkAuth();
 const userDetailData: any = ref({
