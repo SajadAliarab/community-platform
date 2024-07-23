@@ -39,7 +39,7 @@ const checkAuth = async () => {
     if (token) {
         const res = await checkToken(token);
         if (res.status === 200) {
-            authenticated.value = true;
+            
             const data = await res.json();
             const res2 = await getUserById(data.data);
             if (res2.status === 200) {
@@ -50,6 +50,7 @@ const checkAuth = async () => {
                 userData.lName = user.data.lName;
                 userData.email = user.data.email;
             }
+            authenticated.value = true;
         }
     }else{
       authenticated.value = false;
@@ -107,7 +108,7 @@ const dashboard = () => {
   router.push('/dashboard');
 }
 
-
+watch(authenticated,getUser)
 
 router.beforeEach(async (to, from, next) => {
  checkAuth();
