@@ -8,7 +8,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
+<<<<<<< HEAD
 RUN npm install
+=======
+RUN yarn install
+>>>>>>> origin/master
 
 # Copy all files
 COPY . .
@@ -17,4 +21,8 @@ COPY . .
 EXPOSE 3000
 
 # Run the development server
+<<<<<<< HEAD
 CMD ["npm", "dev"]
+=======
+CMD ["yarn", "dev"]
+>>>>>>> origin/master
