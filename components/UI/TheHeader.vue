@@ -6,6 +6,9 @@ import type { UserModel } from '~/models/UserModel';
 import { getUserDetail } from '~/services/UserDetailService';
 import { title } from '~/enums/title';
 
+const config = useRuntimeConfig()
+const apiUrl = config.public.apiUrl
+
 const q = ref('')
 const authenticated = ref(false);
 const router = useRouter();
@@ -157,7 +160,7 @@ router.beforeEach(async (to, from, next) => {
     <div v-if="authenticated" >
       <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
         <img class="w-14 h-14 rounded-full border-4 border-primary-500 dark:border-gray-950 hover:border-primary-100"
-        :src="`http://localhost:8000/uploads/${userDetailData.image}`" alt="user photo">
+        :src="`${apiUrl}/uploads/${userDetailData.image}`" alt="user photo">
 
     <template #account>
       <div class="text-left">

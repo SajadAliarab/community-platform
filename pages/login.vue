@@ -3,6 +3,13 @@ import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 import type { LoginModel } from '~/models/UserModel';
 import { loginUser } from '~/services/UserService';
+import { useRuntimeConfig } from "#app";
+
+
+      const config = useRuntimeConfig();
+      const apiUrl = config.public.apiUrl;
+  
+console.log(apiUrl);
 
 const schema = z.object({
   email: z.string().email('Invalid email'),

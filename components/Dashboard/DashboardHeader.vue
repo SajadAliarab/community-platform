@@ -4,6 +4,9 @@ import type { UserModel } from '~/models/UserModel';
 import { getUserDetail } from '~/services/UserDetailService';
 import { checkToken, deleteUserById, getUserById, logoutUser } from '~/services/UserService';
 
+const config = useRuntimeConfig()
+const apiUrl = config.public.apiUrl
+
 const router = useRouter();
 const isOpenDelete = ref(false);
 const isOpenEdit = ref(false);
@@ -73,7 +76,7 @@ const deleteUser = async () => {
 <template>
     <USkeleton v-if="!userDetailData.cover_image" class="h-28" />
         <div class="relative group">
-        <img v-if="userDetailData.cover_image" :src="`http://localhost:8000/uploads/${userDetailData.cover_image}`" alt="hero" class="flex w-full h-28  transition duration-300 group-hover:blur-sm" />
+        <img v-if="userDetailData.cover_image" :src="`${apiUrl}/uploads/${userDetailData.cover_image}`" alt="hero" class="flex w-full h-28  transition duration-300 group-hover:blur-sm" />
         <div class="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
             <UButton color="primary" label="Change Cover" class="text-white" @click="isOpenCoverImage=true" />
             <UModal v-model="isOpenCoverImage">
@@ -86,7 +89,7 @@ const deleteUser = async () => {
     <div class="absolute top-24 pl-5 z-30 group ">
         <USkeleton v-if="!userDetailData.image" class="absolute ml-5 h-20 inset-0 flex justify-center items-center  rounded-full border-4 border-primary-950 dark:border-gray-950" />
         <img v-if="userDetailData.image" class="w-20 h-20 rounded-full border-4 border-primary-950 dark:border-gray-950 hover:border-primary-100"
-        :src="`http://localhost:8000/uploads/${userDetailData.image}`" alt="user photo">
+        :src="`${apiUrl}/uploads/${userDetailData.image}`" alt="user photo">
             <div class="absolute ml-5  inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition duration-300 rounded-full cursor-pointer" @click ="isOpenProfileImage=true">
                 <UModal v-model="isOpenProfileImage">
                     <UserChangeProfileImage :userDetailData="userDetailData" @isOpenProfileImage="isOpenProfileImage=false"/>

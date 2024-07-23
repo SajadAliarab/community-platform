@@ -1,8 +1,9 @@
 import type { UserDetailModel } from "~/models/UserDetailModel"
 
+const apiUrl = 'http://api-community.sajad.uk'; 
 
 export function getUserDetail(id:number): Promise<any> {
-    return fetch('http://localhost:8000/api/v1/get-user-detail/'+id, {
+    return fetch(`${apiUrl}/api/v1/get-user-detail/`+id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -12,7 +13,7 @@ export function getUserDetail(id:number): Promise<any> {
     }).then(response => response.json())
 }
 export async function updateUserDetail(id:number, data: UserDetailModel): Promise<any> {
-    return fetch('http://localhost:8000/api/v1/update-user-detail/'+id, {
+    return fetch(`${apiUrl}/api/v1/update-user-detail/`+id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
