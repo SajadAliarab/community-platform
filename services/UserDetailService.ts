@@ -1,6 +1,6 @@
 import type { UserDetailModel } from "~/models/UserDetailModel"
 
-const apiUrl = 'http://api-community.sajad.uk'; 
+const apiUrl = 'https://api-community.sajad.uk'; 
 // const apiUrl = 'http://localhost:8000'; 
 export function getUserDetail(id:number): Promise<any> {
     return fetch(`${apiUrl}/api/v1/get-user-detail/`+id, {

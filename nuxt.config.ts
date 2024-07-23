@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui"],
   runtimeConfig: {
     public: {
-      apiUrl: 'http://api-community.sajad.uk'
+      apiUrl: 'https://api-community.sajad.uk'
     }
   }
   

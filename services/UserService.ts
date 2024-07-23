@@ -1,6 +1,6 @@
 import type { LoginModel, RegisterModel, UserModel } from "~/models/UserModel";
 
-const apiUrl = 'http://api-community.sajad.uk'; 
+const apiUrl = 'https://api-community.sajad.uk'; 
 // const apiUrl = 'http://localhost:8000'; 
 
 // Function to register a new user
