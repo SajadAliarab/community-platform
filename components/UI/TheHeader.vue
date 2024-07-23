@@ -107,7 +107,7 @@ const dashboard = () => {
   router.push('/dashboard');
 }
 
-watch(authenticated,getUser);
+
 
 router.beforeEach(async (to, from, next) => {
  checkAuth();
