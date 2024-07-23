@@ -2,7 +2,7 @@
 <template>
     <UContainer>
         <UCard>
-        <template #header>
+        <template >
             <div >
                 <section id="user-area" class="text-center mb-16">
       <h2 class="text-3xl font-bold mb-4">User Area</h2>
