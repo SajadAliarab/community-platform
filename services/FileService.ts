@@ -1,4 +1,5 @@
 const apiUrl = 'http://api-community.sajad.uk'; 
+// const apiUrl = 'http://localhost:8000'; 
 export function insertFile(file:any): Promise<any>{
     const formData = new FormData();
       formData.append('file', file);

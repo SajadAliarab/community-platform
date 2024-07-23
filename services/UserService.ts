@@ -1,6 +1,7 @@
 import type { LoginModel, RegisterModel, UserModel } from "~/models/UserModel";
 
 const apiUrl = 'http://api-community.sajad.uk'; 
+// const apiUrl = 'http://localhost:8000'; 
 
 // Function to register a new user
 export function registerUser(registerModel: RegisterModel): Promise<any> {
@@ -66,15 +67,13 @@ export function logoutUser(token: String): Promise<any> {
 
 // Function to get a user by ID
 export function getUserById(id: Number): Promise<any> {
-    return fetch(`${apiUrl}/api/v1/get-user-by-id/`, {
-        method: 'POST',
+    return fetch(`${apiUrl}/api/v1/get-user-by-id/`+id, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Request-Headers': '*'
         },
-        body: JSON.stringify({
-            id: id
-        })
+
     });
 }
 

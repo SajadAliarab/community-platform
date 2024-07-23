@@ -33,33 +33,28 @@ const items = [
     action: 'signOut'
   }]
 ]
-// const   checkAuth = async() => {
-//   const token = localStorage.getItem('token');
-//   if(token){
-//     const res =await checkToken(token);
-//     if (res.status === 200) {
-//             const data = await res.json();
-//             const res2 = await getUserById(data.data);
-//             if (res2.status === 200) {
-//               authenticated.value = true;
-//                 const user = await res2.json();
-//                 userData.id = user.data.id;
-//                 userData.userName = user.data.userName;
-//                 userData.fName = user.data.fName;
-//                 userData.lName = user.data.lName;
-//                 userData.email = user.data.email;
-//             }
-//         }else{
-//       authenticated.value = false;
-//       await logoutUser(token);
-//       localStorage.removeItem('token');
-//     }
-   
-//   }else{
-//     authenticated.value = false;
-  
-//   }
-// }
+const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        const res = await checkToken(token);
+        if (res.status === 200) {
+            authenticated.value = true;
+            const data = await res.json();
+            const res2 = await getUserById(data.data);
+            if (res2.status === 200) {
+                const user = await res2.json();
+                userData.id = user.data.id;
+                userData.userName = user.data.userName;
+                userData.fName = user.data.fName;
+                userData.lName = user.data.lName;
+                userData.email = user.data.email;
+            }
+        }
+    }else{
+      authenticated.value = false;
+    }
+}
+checkAuth();
 const userDetailData: any = ref({
     image: '',
     cover_image: '',
@@ -70,19 +65,23 @@ const userDetailData: any = ref({
     point: 0,
 });
 
-
-// const getUser = async () => {
-//     await checkAuth();
-//     const res = await getUserDetail(userData.id);
-//     if (res.result === true) {
-//    userDetailData.value = res.data;
-//     } else {
-//         console.log(res.message);
-//     }
-// }
-// getUser();
+const getUser = async () => {
+    const res2:any = await checkAuth()
+    if(res2){
+    const res = await getUserDetail(userData.id);
+    if (res.result === true) {
+   userDetailData.value = res.data;
+   authenticated.value = true;
+    } else {
+        console.log(res.message);
+        authenticated.value = false;
+    }
+  }else{
+    authenticated.value = false;
+  }
+}
+getUser();
 const signOut = async () => {
-  try {
     // Fetch sign-out address
     const token = localStorage.getItem('token');
     if(!token){
@@ -100,21 +99,19 @@ const signOut = async () => {
       console.log('Error signing out:', res);
     }
   }
-  } catch (error) {
-    console.error('Error signing out:', error);
-  }
+  
 }
 const dashboard = () => {
   router.push('/dashboard');
 }
 
-// watch(authenticated,getUser);
+watch(authenticated,getUser);
 
-// router.beforeEach(async (to, from, next) => {
-//  checkAuth();
+router.beforeEach(async (to, from, next) => {
+ checkAuth();
 
-//   next();
-// });
+  next();
+});
 
 
 </script>
