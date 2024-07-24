@@ -1,58 +1,23 @@
 <script setup lang="ts">
 import { checkToken, getUserById, logoutUser } from '~/services/UserService';
-
 import ThemeSwitcher from './ThemeSwitcher.vue';
 import type { UserModel } from '~/models/UserModel';
 import { getUserDetail } from '~/services/UserDetailService';
 import { title } from '~/enums/title';
 
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiUrl
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
-const q = ref('')
+const q = ref('');
 const authenticated = ref(false);
 const router = useRouter();
-const userData:UserModel = reactive({
+const userData: UserModel = reactive({
   id: 0,
   userName: '',
   fName: '',
   lName: '',
   email: '',
-})
-const items = [
-  [{
-    slot: 'account',
-    disabled: true
-  }], [{
-    label: 'Your Profile',
-    icon: 'i-heroicons-user',
-    action: 'dashboard'
-  }], [{
-    label: 'Sign out',
-    icon: 'i-heroicons-arrow-right-start-on-rectangle',
-    action: 'signOut'
-  }]
-]
-const checkAuth = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const res = await checkToken(token);
-      if (res.status === 429) {
-        // Handle rate limit
-        console.log('Rate limit exceeded. Please try again later.');
-        return;
-      }
-      if (res.status === 200) {
-        const data = await res.json();
-        // Proceed with the rest of your logic
-      }
-    }
-  } catch (error) {
-    console.error('Error checking auth:', error);
-  }
-};
-checkAuth();
+});
 const userDetailData: any = ref({
     image: '',
     cover_image: '',
@@ -63,56 +28,97 @@ const userDetailData: any = ref({
     point: 0,
 });
 
+
+const items = [
+  [{ slot: 'account', disabled: true }],
+  [{ label: 'Your Profile', icon: 'i-heroicons-user', action: 'dashboard' }],
+  [{ label: 'Sign out', icon: 'i-heroicons-arrow-right-start-on-rectangle', action: 'signOut' }],
+];
+
+const checkAuth = async (): Promise<boolean> => {
+  try {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const res = await checkToken(token);
+      if (res.status === 429) {
+        console.log('Rate limit exceeded. Please try again later.');
+        return false;
+      }
+      if (res.status === 200) {
+        const data = await res.json();
+        const userRes = await getUserById(data.data);
+        if (userRes.status === 200) {
+          const user = await userRes.json();
+          userData.id = user.data.id;
+          userData.userName = user.data.userName;
+          userData.fName = user.data.fName;
+          userData.lName = user.data.lName;
+          userData.email = user.data.email;
+          authenticated.value = true;
+          return true;
+        }
+      }
+    }
+    authenticated.value = false;
+    return false;
+  } catch (error) {
+    console.error('Error checking auth:', error);
+    authenticated.value = false;
+    return false;
+  }
+};
+
 const getUser = async () => {
-    const res2:any = await checkAuth()
-    if(res2){
+  const isAuthenticated = await checkAuth();
+  if (isAuthenticated) {
     const res = await getUserDetail(userData.id);
     if (res.result === true) {
-   userDetailData.value = res.data;
-   authenticated.value = true;
+      userDetailData.value = res.data;
     } else {
-        console.log(res.message);
-        authenticated.value = false;
+      console.log(res.message);
+      authenticated.value = false;
     }
-  }else{
+  } else {
     authenticated.value = false;
   }
-}
-getUser();
+};
+
 const signOut = async () => {
-    // Fetch sign-out address
-    const token = localStorage.getItem('token');
-    if(!token){
-      return;
-    } else{
-    const res = await logoutUser(token);
-    if(res.status === 200){
-      // Remove token from localStorage
-      localStorage.removeItem('token');
-      // Set authenticated to false
-      authenticated.value = false;
-      // Redirect to home or login page
-      router.push('/');
-    }else{
-      console.log('Error signing out:', res);
-    }
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
   }
-  
-}
+  const res = await logoutUser(token);
+  if (res.status === 200) {
+    localStorage.removeItem('token');
+    authenticated.value = false;
+    router.push('/');
+  } else {
+    console.log('Error signing out:', res);
+  }
+};
+
 const dashboard = () => {
   router.push('/dashboard');
-}
+};
 
-watch(authenticated,getUser)
-
-router.beforeEach(async (to, from, next) => {
- checkAuth();
-
-  next();
+onMounted(async () => {
+  await checkAuth();
+  await getUser();
 });
 
+watch(authenticated, async (isAuthenticated) => {
+  if (isAuthenticated) {
+    await getUser();
+  }
+});
 
+router.beforeEach(async (to, from, next) => {
+  await checkAuth();
+  next();
+});
 </script>
+
 
 <template>
 
