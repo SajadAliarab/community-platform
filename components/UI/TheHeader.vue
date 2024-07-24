@@ -34,29 +34,24 @@ const items = [
   }]
 ]
 const checkAuth = async () => {
-  if(process.client){
+  try {
     const token = localStorage.getItem('token');
     if (token) {
-        const res = await checkToken(token);
-        if (res.status === 200) {
-            
-            const data = await res.json();
-            const res2 = await getUserById(data.data);
-            if (res2.status === 200) {
-                const user = await res2.json();
-                userData.id = user.data.id;
-                userData.userName = user.data.userName;
-                userData.fName = user.data.fName;
-                userData.lName = user.data.lName;
-                userData.email = user.data.email;
-            }
-            authenticated.value = true;
-        }
-    }else{
-      authenticated.value = false;
+      const res = await checkToken(token);
+      if (res.status === 429) {
+        // Handle rate limit
+        console.log('Rate limit exceeded. Please try again later.');
+        return;
+      }
+      if (res.status === 200) {
+        const data = await res.json();
+        // Proceed with the rest of your logic
+      }
     }
+  } catch (error) {
+    console.error('Error checking auth:', error);
   }
-}
+};
 checkAuth();
 const userDetailData: any = ref({
     image: '',
