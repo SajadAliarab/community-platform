@@ -6,6 +6,6 @@ export default defineNuxtConfig({
     public: {
       apiUrl: 'https://api-community.sajad.uk'
     }
-  }
-  
+  },
+  ssr: false
 });
