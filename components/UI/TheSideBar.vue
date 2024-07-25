@@ -37,7 +37,7 @@
             </li>
             <li>
               <UDivider 
-              label=" From Toolstation "
+              label=" From Retailer "
                 :ui="{ label: 'text-gray-500 dark:text-primary-400' }"
                 />
             </li>
