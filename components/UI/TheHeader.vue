@@ -126,7 +126,7 @@ router.beforeEach(async (to, from, next) => {
 <nav class="bg-gray-900 border-gray-200 dark:bg-primary-300 sticky">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="/public/svg/toolstation.svg" class="h-12" alt="Toolstation Logo" />
+      <!-- <img src="/public/svg/toolstation.svg" class="h-12" alt="Toolstation Logo" /> -->
   </a>
   <UInput
     v-model="q"
