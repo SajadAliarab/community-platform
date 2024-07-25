@@ -14,6 +14,10 @@
   
   // Dark mode state
   const isDark = ref(true)
+  if(!localStorage.getItem('nuxt-color-mode')) {
+    localStorage.setItem('nuxt-color-mode', 'dark')
+  }
+ 
   
   
   // Function to update the theme

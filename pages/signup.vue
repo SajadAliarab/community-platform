@@ -69,6 +69,13 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
 <UContainer>
     <UCard>
     <template #header>
+      <UAlert
+    icon="i-heroicons-exclamation-triangle"
+    color="primary"
+    variant="solid"
+    title="Important Notice!"
+    description="This website is currently under construction and is only available for testing purposes. Please use fake or placeholder information when signing up. Your provided details will not be stored or used beyond this testing phase. We appreciate your understanding and cooperation."
+  />
         <div class=" flex justify-center" >
         <h1 class=" font-extrabold" >Register User Form</h1>
         </div>
