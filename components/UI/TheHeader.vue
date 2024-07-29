@@ -128,6 +128,7 @@ router.beforeEach(async (to, from, next) => {
   </a>
   <UInput
     v-model="q"
+    class=" sr-only md:not-sr-only"
     name="q"
     placeholder="Search..."
     icon="i-heroicons-magnifying-glass-20-solid"

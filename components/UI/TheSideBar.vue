@@ -15,7 +15,7 @@
       <aside
         id="separator-sidebar"
         :class="[
-          'fixed left-0 z-40 w-64 h-full transition-transform bg-primary-200 dark:bg-gray-900',
+          'fixed left-0 z-40 w-64 h-screen transition-transform bg-primary-200 dark:bg-gray-900',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full',
           'sm:translate-x-0'
         ]"
