@@ -12,11 +12,11 @@
                 </div>
 
     <div id="features" class="text-center mb-16">
-      <h2 class="text-3xl font-bold mb-4">Upcoming Features</h2>
+      <h2 class="text-3xl font-bold mb-4">Upcoming Feature</h2>
       <p class="text-lg mb-8">I am working hard to bring you more features. Stay tuned for updates and new functionalities that will enhance your experience.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-primary-500 p-6 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold mb-2 text-black">Community Forums</h3>
+          <h3 class="text-2xl font-bold mb-2 text-black">Community Forum</h3>
           <p class="text-gray-700">Engage with other users, share your experiences, and get advice from the community. write a topic and answer other user`s questions</p>
         </div>
         <div class="bg-primary-500 p-6 rounded-lg shadow-lg">
