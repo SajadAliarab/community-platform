@@ -29,6 +29,7 @@ const router = useRouter();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loadingBtn.value = true;
+  console.log('onsubmit');
   try {
     const res = await loginUser(userData, remember.value);
     if (res.status === 200) {

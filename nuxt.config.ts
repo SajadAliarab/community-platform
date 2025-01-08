@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: 'https://api-community.sajad.uk'
+      apiUrl: 'https://coapi.sajad.uk'
     }
   },
   ssr: false
