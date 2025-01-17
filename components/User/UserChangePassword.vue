@@ -31,8 +31,10 @@ const changePassword = async () => {
         warning.value = [false, 'Password changed successfully'];
         loadingBtn.value = false;
         setTimeout(() => {
+            if (import.meta.client) {
             localStorage.removeItem('token');
             router.push('/login');
+            }
         }, 2000);
     }else{
         warning.value = [true, res.message]

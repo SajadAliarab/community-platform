@@ -10,5 +10,5 @@ export default defineNuxtConfig({
       apiUrl: 'https://coapi.sajad.uk'
     }
   },
-  ssr: false
+  ssr: true 
 });

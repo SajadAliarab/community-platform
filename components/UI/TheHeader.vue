@@ -37,6 +37,7 @@ const items = [
 
 const checkAuth = async (): Promise<boolean> => {
   try {
+    if (import.meta.client) {
     const token = localStorage.getItem('token');
     if (token) {
       const res = await checkToken(token);
@@ -61,6 +62,7 @@ const checkAuth = async (): Promise<boolean> => {
     }
     authenticated.value = false;
     return false;
+  }
   } catch (error) {
     console.error('Error checking auth:', error);
     authenticated.value = false;
@@ -84,6 +86,7 @@ const getUser = async () => {
 };
 
 const signOut = async () => {
+  if (import.meta.client) {
   const token = localStorage.getItem('token');
   if (!token) {
     return;
@@ -96,6 +99,7 @@ const signOut = async () => {
   } else {
     console.log('Error signing out:', res);
   }
+}
 };
 
 const dashboard = () => {

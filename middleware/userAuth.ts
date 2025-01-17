@@ -3,11 +3,13 @@ export default defineNuxtRouteMiddleware(to => {
     if (import.meta.server) return
     if (import.meta.client){
         if(to.path.startsWith('/dashboard')){
-
+            if (import.meta.client) {
             const token:any=localStorage.getItem('token');
+            
             if(!token){
                 return navigateTo('/login');
             }
+        }
         }
     }
     
