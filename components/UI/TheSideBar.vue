@@ -15,7 +15,7 @@
       <aside
         id="separator-sidebar"
         :class="[
-          'fixed left-0 z-40 w-64 h-screen transition-transform bg-primary-200 dark:bg-gray-900',
+          'fixed left-0 z-40 w-72 h-screen transition-transform bg-primary-200 dark:bg-gray-900',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full',
           'sm:translate-x-0'
         ]"
@@ -37,7 +37,7 @@
             </li>
             <li>
               <UDivider 
-              label=" From Retailer "
+              label=" From Club "
                 :ui="{ label: 'text-gray-500 dark:text-primary-400' }"
                 />
             </li>
@@ -55,8 +55,8 @@
             </li>
             <li>
                 <ULink to="/announcements" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                <Icon name="i-heroicons-beaker-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span class="ml-3">Knowledge Base</span>
+                <Icon name="i-heroicons-trophy-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span class="ml-3">Match Centre</span>
               </ULink>
             </li>
             <li>
@@ -74,31 +74,31 @@
             <li>
               <ULink to="/forums" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
                 <Icon name="i-heroicons-chat-bubble-left-right-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span class="ml-3">Ask The Community</span>
+                <span class="ml-3">Discuss With Community</span>
               </ULink>
             </li>
             <li>
               <UDivider 
-              label=" Products "
+              label=" Fan Content "
                 :ui="{ label: 'text-gray-500 dark:text-primary-400' }"
                 />
             </li>
             <li>
               <ULink to="/products" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                <Icon name="i-heroicons-wrench-screwdriver-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span class="ml-3">New Products</span>
+                <Icon name="i-heroicons-photo-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span class="ml-3">Fan Galleries </span>
               </ULink>
             </li>
             <li>
               <ULink to="/products" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                <Icon name="i-heroicons-receipt-percent-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span class="ml-3">Special Offers</span>
+                <Icon name="i-heroicons-newspaper-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span class="ml-3">Fan Blogs</span>
               </ULink>
             </li>
             <li>
                 <ULink to="/products" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
-                <Icon name="i-heroicons-rocket-launch-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span class="ml-3">Coming Soon Products</span>
+                <Icon name="i-heroicons-gift-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span class="ml-3">Polls and Quizzes</span>
               </ULink>
             </li>
           </ul>

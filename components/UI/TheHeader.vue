@@ -128,7 +128,7 @@ router.beforeEach(async (to, from, next) => {
 <nav class="bg-gray-900 border-gray-200 dark:bg-primary-500 sticky">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img  src="/public/images/logo2.png" class=" w-36" alt="My Community Logo" />
+      <img  src="/public/images/community.png" class=" h-16 " alt="My Community Logo" />
   </a>
   <UInput
     v-model="q"
