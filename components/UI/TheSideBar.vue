@@ -101,6 +101,18 @@
                 <span class="ml-3">Polls and Quizzes</span>
               </ULink>
             </li>
+            <li>
+              <UDivider 
+              label=" Admin Panel "
+                :ui="{ label: 'text-gray-500 dark:text-primary-400' }"
+                />
+            </li>
+            <li>
+              <ULink to="https://coapi.sajad.uk" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
+                <Icon name="i-heroicons-cog-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span class="ml-3">Admin Panel</span>
+              </ULink>
+            </li>
           </ul>
 
 
