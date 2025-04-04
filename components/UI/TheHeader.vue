@@ -77,7 +77,6 @@ const getUser = async () => {
     if (res.result === true) {
       userDetailData.value = res.data;
     } else {
-      console.log(res.message);
       authenticated.value = false;
     }
   } else {

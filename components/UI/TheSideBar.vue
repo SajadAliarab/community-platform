@@ -72,7 +72,7 @@
               </ULink>
             </li>
             <li>
-              <ULink to="/forums" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
+              <ULink to="/categories" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 w-full">
                 <Icon name="i-heroicons-chat-bubble-left-right-20-solid" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" />
                 <span class="ml-3">Discuss With Community</span>
               </ULink>
