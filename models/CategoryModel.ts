@@ -5,4 +5,5 @@ export interface Category {
     description: string | null;
     image: string | null;
     active: boolean;
+    children: Category[] | null;
 }

@@ -35,7 +35,7 @@ const items = [
   [{ label: 'Sign out', icon: 'i-heroicons-arrow-right-start-on-rectangle', action: 'signOut' }],
 ];
 
-const checkAuth = async (): Promise<boolean> => {
+const checkAuth = async (): Promise<boolean | void> => {
   try {
     if (import.meta.client) {
     const token = localStorage.getItem('token');
@@ -158,7 +158,7 @@ router.beforeEach(async (to, from, next) => {
 
   </div>
     <div v-if="authenticated" >
-      <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
+      <UDropdown :items?="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
         <img class="w-14 h-14 rounded-full border-4 border-primary-500 dark:border-gray-950 hover:border-primary-100"
         :src="`${apiUrl}/uploads/${userDetailData.image}`" alt="user photo">
 
