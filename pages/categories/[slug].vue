@@ -73,7 +73,7 @@ getCategories();
                 <UCard v-for="category in children" :key="category.id" class="mb-4 flex-1 basis-1/2 md:basis-1">
                     <ULink :to="'/categories/' + category.slug">
                         <div class="w-full aspect-video mb-2 rounded-md overflow-hidden">
-                            <img :src="`https:coapi.sajad.uk/storage/${category.image}`" alt="Category Image"
+                            <img :src="`https://coapi.sajad.uk/storage/${category.image}`" alt="Category Image"
                                 class="w-full h-48 object-cover" />
                         </div>
                         <h2 class="text-lg font-semibold">{{ category.name }}</h2>
