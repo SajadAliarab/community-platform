@@ -29,7 +29,7 @@ onMounted(() => {
             <ULink :to="'/categories/' + category.slug" >
                 <div class="w-full aspect-video mb-2 rounded-md overflow-hidden">
                     <img
-                        :src="`http://localhost:8000/storage/${category.image}`"
+                        :src="`https://coapi.sajad.uk/storage/${category.image}`"
                         alt="Category Image"
                         class="w-full h-48 object-cover"
                     />
